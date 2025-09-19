@@ -4,8 +4,6 @@
  */
 package com.mycompany.unitconversionjfx;
 
-import java.util.function.Function;
-
 /**
  * Stores a pair of unit and the float value in this unit.
  * 

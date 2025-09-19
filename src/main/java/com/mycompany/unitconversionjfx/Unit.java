@@ -44,7 +44,7 @@ public class Unit {
      * @param conversionFuncion The Function by which should be applied to
      * convert to the passed unit.
      */
-    public void addConversion(Unit unitObject, Function conversionFuncion){
+    public void addConversion(Unit unitObject, Function<Float, Float> conversionFuncion){
         conversions.put(unitObject, conversionFuncion);
     }
 }

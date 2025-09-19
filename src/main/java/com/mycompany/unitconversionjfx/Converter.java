@@ -21,14 +21,14 @@ public final class Converter {
      * 
      * @param initialUnit The Unit to be converted from.
      * @param targetUnit The Unit to be converted to.
-     * @param value Float value to be converted.
+     * @param initialValue Float value to be converted.
      * @return 
     */
-    public static Float convertTo(Unit initialUnit, Unit targetUnit, float value) {
+    public static Float convertTo(Unit initialUnit, Unit targetUnit, float initialValue) {
         HashSet<Unit> visited = new HashSet<>(); // Nodes already visited
         Queue<ConversionPair> queue = new ArrayDeque<>(); // Nodes still to be visited
         
-        ConversionPair start = new ConversionPair(initialUnit, value);
+        ConversionPair start = new ConversionPair(initialUnit, initialValue);
         queue.add(start);
         
         while(!queue.isEmpty()){
@@ -41,7 +41,7 @@ public final class Converter {
             
             currentPair.unit.conversions.forEach( (k, v) -> {
                 if(!visited.contains(k)){
-                    ConversionPair queueMember = new ConversionPair(k, v.apply(value));
+                    ConversionPair queueMember = new ConversionPair(k, v.apply(currentPair.value));
                     queue.add(queueMember);
                 }
             }
