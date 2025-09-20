@@ -47,4 +47,8 @@ public class Unit {
     public void addConversion(Unit unitObject, Function<Float, Float> conversionFuncion){
         conversions.put(unitObject, conversionFuncion);
     }
+    
+    public String toString(){
+        return this.name;
+    }
 }

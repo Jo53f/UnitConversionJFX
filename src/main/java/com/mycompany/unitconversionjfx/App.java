@@ -7,6 +7,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -16,7 +17,7 @@ public class App extends Application {
 
     private static Scene scene;
     
-    public static Set units;
+    public static Set<Unit> units;
 
     @Override
     public void start(Stage stage) throws IOException {
@@ -54,14 +55,22 @@ public class App extends Application {
         Unit kilometre = new Unit("kilometre");
         Unit megametre = new Unit("megametre");
         
-        nanometre.addConversion(micrometre, input -> input*1000);
-        micrometre.addConversion(nanometre, input -> input/1000);
-        micrometre.addConversion(millimetre, input -> input*1000);
-        millimetre.addConversion(micrometre, input -> input/1000);
-        millimetre.addConversion(centimetre, input -> input*10);
-        centimetre.addConversion(millimetre, input -> input/10);
-        centimetre.addConversion(metre, input -> input*100);
-        metre.addConversion(centimetre, input -> input/100);
+        nanometre.addConversion(micrometre, input -> input/1000);
+        micrometre.addConversion(nanometre, input -> input*1000);
+        micrometre.addConversion(millimetre, input -> input/1000);
+        millimetre.addConversion(micrometre, input -> input*1000);
+        millimetre.addConversion(centimetre, input -> input/10);
+        centimetre.addConversion(millimetre, input -> input*10);
+        centimetre.addConversion(metre, input -> input/100);
+        metre.addConversion(centimetre, input -> input*100);
+        metre.addConversion(decametre, input -> input/10);
+        decametre.addConversion(metre, input -> input*10);
+        decametre.addConversion(hectometre, input -> input/10);
+        hectometre.addConversion(decametre, input -> input*10);
+        hectometre.addConversion(kilometre, input -> input/10);
+        kilometre.addConversion(hectometre, input -> input*10);
+        kilometre.addConversion(megametre, input -> input/10);
+        megametre.addConversion(kilometre, input -> input*10);
         
         units = Set.of(
                 nanometre,
