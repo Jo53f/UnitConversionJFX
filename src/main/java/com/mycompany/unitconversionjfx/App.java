@@ -7,7 +7,6 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -45,6 +44,7 @@ public class App extends Application {
      * respective conversion functions.
      */
     private static void createUnits(){
+        // Metric Distance Unit Objects
         Unit nanometre = new Unit("nanometre");
         Unit micrometre = new Unit("micrometre");
         Unit millimetre = new Unit("millimetre");
@@ -55,6 +55,13 @@ public class App extends Application {
         Unit kilometre = new Unit("kilometre");
         Unit megametre = new Unit("megametre");
         
+        // Imperial Distance Unit Objects
+        Unit inch = new Unit("inch");
+        Unit foot = new Unit("foot");
+        Unit yard = new Unit("yard");
+        Unit mile = new Unit("mile");
+        
+        // Metric Conversion connections
         nanometre.addConversion(micrometre, input -> input/1000);
         micrometre.addConversion(nanometre, input -> input*1000);
         micrometre.addConversion(millimetre, input -> input/1000);
@@ -72,6 +79,18 @@ public class App extends Application {
         kilometre.addConversion(megametre, input -> input/10);
         megametre.addConversion(kilometre, input -> input*10);
         
+        // Imperial Conversion connections
+        inch.addConversion(foot, input -> input/12);
+        foot.addConversion(inch, input -> input*12);
+        foot.addConversion(yard, input -> input/3);
+        yard.addConversion(foot, input -> input*3);
+        yard.addConversion(mile, input -> input/1760);
+        mile.addConversion(yard, input -> input*1760);
+        
+        // Metric and Imperial cross conversion connections
+        inch.addConversion(centimetre, input -> input*2.54f);
+        centimetre.addConversion(inch, input -> input/2.54f);
+        
         units = Set.of(
                 nanometre,
                 micrometre,
@@ -81,7 +100,11 @@ public class App extends Application {
                 decametre,
                 hectometre,
                 kilometre,
-                megametre
+                megametre,
+                inch,
+                foot,
+                yard,
+                mile
         );
     }
 }
