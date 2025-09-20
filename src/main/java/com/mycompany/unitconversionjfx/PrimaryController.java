@@ -8,7 +8,7 @@ import javafx.scene.control.TextField;
 public class PrimaryController {
     
     @FXML
-    private Label result;
+    private Label result; // Label, to show the result of conversion
     
     // Inputs
     @FXML
@@ -18,6 +18,10 @@ public class PrimaryController {
     @FXML
     private ComboBox<Unit> targetUnit; // Users selected target Unit of measurement
     
+    /**
+     * Runs when the FXML elements are initialised, adding all unit elements
+     * from App.units to the two ComboBoxes, initalUnit and targetUnit.
+     */
     @FXML
     private void initialize(){
         for(Unit unit:App.units) {
@@ -26,6 +30,11 @@ public class PrimaryController {
         }
     }
     
+    /**
+     * Method reads value from userInput and checks that it can be converted to
+     * a float, then calls Converter.convertTo() to convert the value. The result
+     * will be passed to the result label.
+     */
     @FXML
     private void convert() {
         float value = 0;
